@@ -13,8 +13,17 @@ import java.util.Locale;
 
 public class Range {
 
-    @NonNull CalendarDay from;
-    @NonNull CalendarDay to;
+    @NonNull
+    CalendarDay from;
+    @NonNull
+    CalendarDay to;
+    int color;
+
+    private Range(@NonNull CalendarDay from, @NonNull CalendarDay to, int color) {
+        this.from = from;
+        this.to = to;
+        this.color = color;
+    }
 
     private Range(@NonNull CalendarDay from, @NonNull CalendarDay to) {
         this.from = from;
@@ -23,9 +32,10 @@ public class Range {
 
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "[From: %d/%d/%d - To: %d/%d/%d]",
+        return String.format(Locale.getDefault(), "[From: %d/%d/%d - To: %d/%d/%d - Color: %d]",
                 from.getDay(), from.getMonth(), from.getYear(),
-                to.getDay(), to.getMonth(), to.getYear());
+                to.getDay(), to.getMonth(), to.getYear(),
+                color);
     }
 
     boolean isInRange(@NonNull CalendarDay day) {
@@ -45,6 +55,23 @@ public class Range {
         }
 
         return calendarDays;
+    }
+
+    public static Range range(CalendarDay from, CalendarDay to, int color) {
+
+        if (from == null) {
+            throw new NullPointerException("Date from cannot be null.");
+        }
+
+        if (to == null) {
+            throw new NullPointerException("Date to cannot be null.");
+        }
+
+        if (from.isBefore(to)) {
+            return new Range(from, to, color);
+        } else {
+            return new Range(to, from, color);
+        }
     }
 
     public static Range range(CalendarDay from, CalendarDay to) {

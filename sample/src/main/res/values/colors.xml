@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="sample_primary">#0093FF</color>
+    <color name="sample_primary">#F2A138</color>
+    <color name="sample_secondary">#48D365</color>
+    <color name="sample_ternary">#E5464D</color>
     <color name="sample_accent">#006BBA</color>
 </resources>

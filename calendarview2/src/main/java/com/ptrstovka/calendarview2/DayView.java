@@ -34,7 +34,6 @@ import static com.ptrstovka.calendarview2.CalendarView2.SHOW_DEFAULTS;
 import static com.ptrstovka.calendarview2.CalendarView2.showDecoratedDisabled;
 import static com.ptrstovka.calendarview2.CalendarView2.showOtherMonths;
 import static com.ptrstovka.calendarview2.CalendarView2.showOutOfRange;
-import static com.ptrstovka.calendarview2.utils.ColorUtils.lighter;
 import static com.ptrstovka.calendarview2.utils.ColorUtils.transparent;
 
 /**
@@ -45,7 +44,7 @@ class DayView extends CheckedTextView {
 
     private CalendarDay date;
     private int selectionColor = Color.GRAY;
-    private int transparentSelectionColor = transparent(Color.GRAY, 0.5f);
+    private int transparentSelectionColor = selectionColor;
 
     private final int fadeTime;
     private Drawable customBackground = null;
@@ -69,6 +68,10 @@ class DayView extends CheckedTextView {
     public static final int SELECTION_RANGE_LEFT = 843;
     public static final int SELECTION_RANGE_RIGHT = 893;
 
+    public static final int SELECTION_PRESENT = 111;
+    public static final int SELECTION_ABSENT = 222;
+    public static final int SELECTION_HOLIDAYS = 333;
+
     private Rect rangeRect = new Rect();
     private Rect leftRect = new Rect();
     private Rect rightRect = new Rect();
@@ -79,7 +82,8 @@ class DayView extends CheckedTextView {
             SELECTION_FIRST, SELECTION_LAST, SELECTION_NORMAL, SELECTION_RANGE,
             SELECTION_RANGE_LEFT, SELECTION_RANGE_RIGHT
     })
-    public @interface Selection {}
+    public @interface Selection {
+    }
 
     @ShowOtherDates
     private int showOtherDates = SHOW_DEFAULTS;
@@ -167,7 +171,8 @@ class DayView extends CheckedTextView {
 
     public void setSelectionColor(int color) {
         this.selectionColor = color;
-        this.transparentSelectionColor = lighter(color, 0.5f);
+        this.transparentSelectionColor = color;
+//        this.transparentSelectionColor = lighter(color, 0.5f);
         regenerateBackground();
     }
 
@@ -292,8 +297,7 @@ class DayView extends CheckedTextView {
         if (selectionDrawable != null) {
             setBackgroundDrawable(selectionDrawable);
         } else {
-            mCircleDrawable = generateBackground(selection, selectionColor,
-                    transparentSelectionColor, fadeTime, circleDrawableRect);
+            mCircleDrawable = generateBackground(selection, selectionColor, transparentSelectionColor, fadeTime, circleDrawableRect);
             setBackgroundDrawable(mCircleDrawable);
         }
     }
@@ -303,13 +307,13 @@ class DayView extends CheckedTextView {
         drawable.setExitFadeDuration(fadeTime);
 
         int resultColor = (selection == SELECTION_NORMAL || selection == SELECTION_FIRST || selection == SELECTION_LAST)
-                        ? color : transparentColor;
+                ? color : transparentColor;
 
         drawable.addState(new int[]{android.R.attr.state_checked}, generateCircleDrawable(resultColor));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateRippleDrawable(resultColor, bounds));
         } else {
-            drawable.addState(new int[]{android.R.attr.state_pressed}, generateCircleDrawable(transparent(resultColor, 0.5f)));
+            drawable.addState(new int[]{android.R.attr.state_pressed}, generateCircleDrawable(transparent(resultColor, 1f)));
         }
 
         drawable.addState(new int[]{}, generateCircleDrawable(Color.TRANSPARENT));
@@ -326,7 +330,7 @@ class DayView extends CheckedTextView {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static Drawable generateRippleDrawable(final int color, Rect bounds) {
         ColorStateList list = ColorStateList.valueOf(color);
-        Drawable mask = generateCircleDrawable(Color.WHITE);
+        Drawable mask = generateCircleDrawable(color);
         RippleDrawable rippleDrawable = new RippleDrawable(list, null, mask);
 //        API 21
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
@@ -384,8 +388,8 @@ class DayView extends CheckedTextView {
 
     private void calculateBounds(int width, int height) {
 
-        int totalWidth = width - (2*circlePadding);
-        int totalHeight = height - (2* circlePadding);
+        int totalWidth = width - (2 * circlePadding);
+        int totalHeight = height - (2 * circlePadding);
 
         final int radius = Math.min(totalHeight, totalWidth);
         final int offset = Math.abs(totalHeight - totalWidth) / 2;

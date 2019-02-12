@@ -1,26 +1,17 @@
 package com.ptrstovka.calendarview2.sample;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateUtils;
+import android.view.View;
 
-import com.ptrstovka.calendarview2.CalendarDay;
-import com.ptrstovka.calendarview2.DayViewDecorator;
-import com.ptrstovka.calendarview2.DayViewFacade;
 import com.ptrstovka.calendarview2.CalendarView2;
-import com.ptrstovka.calendarview2.OnDateSelectedListener;
-import com.ptrstovka.calendarview2.OnRangeSelectedListener;
 import com.ptrstovka.calendarview2.Range;
-import com.ptrstovka.calendarview2.spans.DotSpan;
 
 import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.ptrstovka.calendarview2.CalendarDay.from;
 import static com.ptrstovka.calendarview2.Range.range;
@@ -34,80 +25,32 @@ public class FeatureTestActivity extends AppCompatActivity {
     @BindView(R.id.calendar_view)
     CalendarView2 calendarView;
 
+    int PRESENT;
+    int ABSENT;
+    int HOLIDAYS;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feature_test);
         ButterKnife.bind(this);
         calendarView.setSelectionMode(CalendarView2.SELECTION_MODE_NONE);
-        selectRange();
-    }
-
-    @OnClick(R.id.calendar_action_button)
-    public void onActionButtonClick() {
+        HOLIDAYS = getResources().getColor(R.color.sample_primary);
+        PRESENT = getResources().getColor(R.color.sample_secondary);
+        ABSENT = getResources().getColor(R.color.sample_ternary);
         selectRange();
     }
 
     private void selectRange() {
         List<Range> ranges = asList(
-                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 5)),
-                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 3)),
-                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 7)),
-                range(from(2017, Calendar.AUGUST, 10), from(2017, Calendar.AUGUST, 27))
+                range(from(2019, Calendar.JANUARY, 3), from(2019, Calendar.JANUARY, 4), PRESENT),
+                range(from(2019, Calendar.JANUARY, 5), from(2019, Calendar.JANUARY, 7), HOLIDAYS),
+                range(from(2019, Calendar.JANUARY, 10), from(2019, Calendar.JANUARY, 14), HOLIDAYS),
+                range(from(2019, Calendar.JANUARY, 17), from(2019, Calendar.JANUARY, 18), ABSENT),
+                range(from(2019, Calendar.JANUARY, 19), from(2019, Calendar.JANUARY, 21), PRESENT)
         );
 
         calendarView.select(ranges);
-    }
-
-    private void addCurrentDayDecorator() {
-        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(@NonNull CalendarView2 widget,
-                                       @NonNull CalendarDay date, boolean selected) {
-                widget.invalidateDecorator(date);
-            }
-        });
-
-        calendarView.setOnRangeSelectedListener(new OnRangeSelectedListener() {
-            @Override
-            public void onRangeSelected(@NonNull CalendarView2 widget, @NonNull List<CalendarDay> dates) {
-                widget.invalidateDecorators();
-            }
-        });
-
-        calendarView.addDecorator(new CurrentDayDecorator(calendarView));
-    }
-
-    private class CurrentDayDecorator extends DayViewDecorator {
-
-        private CalendarView2 view;
-
-        CurrentDayDecorator(CalendarView2 view) {
-            this.view = view;
-        }
-
-        boolean isSelected = false;
-
-        @Override
-        public boolean shouldDecorate(CalendarDay day) {
-            boolean result = DateUtils.isToday(day.getDate().getTime());
-            isSelected = view.getSelectedDates().contains(day);
-            return result;
-        }
-
-        @Override
-        public void decorate(DayViewFacade view) {
-            if (isSelected) {
-                view.addSpan(new DotSpan(8, Color.WHITE));
-            } else {
-                view.addSpan(new DotSpan(8, Color.BLACK));
-            }
-        }
-
-        @Override
-        protected boolean shouldBeCached() {
-            return false;
-        }
     }
 
 }

@@ -339,12 +339,12 @@ public class CalendarView2 extends ViewGroup {
             }
             setRightArrowMask(rightMask);
 
-            setSelectionColor(
-                    a.getColor(
-                            R.styleable.CalendarView2_mcv_selectionColor,
-                            getThemeAccentColor(context)
-                    )
-            );
+//            setSelectionColor(
+//                    a.getColor(
+//                            R.styleable.CalendarView2_mcv_selectionColor,
+//                            getThemeAccentColor(context)
+//                    )
+//            );
 
             CharSequence[] array = a.getTextArray(R.styleable.CalendarView2_mcv_weekDayLabels);
             if (array != null) {
@@ -1559,13 +1559,14 @@ public class CalendarView2 extends ViewGroup {
 
     /**
      * Select date range.
+     *
      * @param range
      */
     private void selectRanges(Range... range) {
         adapter.selectRanges(range);
     }
 
-    private void selectRanges(List<Range> ranges){
+    private void selectRanges(List<Range> ranges) {
         adapter.selectRanges(ranges);
     }
 

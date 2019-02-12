@@ -283,13 +283,13 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
     }
 
     private void applyDecorator(DecoratorResult result, DayView dayView, DayViewFacade facade) {
-        if (result.decorator.shouldDecorate(dayView.getDate())){
+        if (result.decorator.shouldDecorate(dayView.getDate())) {
             if (result.decorator.shouldDecorate(dayView.getDate())) {
 
-                    if (!result.decorator.isCached()) {
-                        result.result.reset();
-                        result.decorator.decorate(result.result);
-                    }
+                if (!result.decorator.isCached()) {
+                    result.result.reset();
+                    result.decorator.decorate(result.result);
+                }
 
                 result.result.applyTo(facade);
             }
@@ -370,6 +370,7 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
 
     /**
      * Return the number of rows to display per page
+     *
      * @return
      */
     protected abstract int getRows();
@@ -473,6 +474,7 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
             CalendarDay day = dayView.getDate();
 
             if (range.isInRange(day)) {
+                dayView.setSelectionColor(range.color);
                 dayView.setChecked(true);
 
                 Integer selection = results.get(day);

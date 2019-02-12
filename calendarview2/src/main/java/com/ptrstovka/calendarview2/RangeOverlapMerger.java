@@ -32,7 +32,7 @@ class RangeOverlapMerger {
                 result.add(previous);
                 previous = current;
             } else {
-                previous = range(previous.from, max(previous.to, current.to));
+                previous = range(previous.from, max(previous.to, current.to), current.color);
             }
         }
 
