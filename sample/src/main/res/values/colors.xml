@@ -4,4 +4,5 @@
     <color name="sample_secondary">#48D365</color>
     <color name="sample_ternary">#E5464D</color>
     <color name="sample_accent">#006BBA</color>
+    <color name="white">#fff</color>
 </resources>

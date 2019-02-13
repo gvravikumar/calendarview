@@ -2,11 +2,13 @@ package com.ptrstovka.calendarview2.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
+import com.ptrstovka.calendarview2.CalendarDay;
 import com.ptrstovka.calendarview2.CalendarView2;
 import com.ptrstovka.calendarview2.Range;
+import com.ptrstovka.calendarview2.format.CustomMultipleDayViewDecorator;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class FeatureTestActivity extends AppCompatActivity {
     int PRESENT;
     int ABSENT;
     int HOLIDAYS;
+    int WHITE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class FeatureTestActivity extends AppCompatActivity {
         HOLIDAYS = getResources().getColor(R.color.sample_primary);
         PRESENT = getResources().getColor(R.color.sample_secondary);
         ABSENT = getResources().getColor(R.color.sample_ternary);
+        WHITE = getResources().getColor(R.color.white);
         selectRange();
     }
 
@@ -49,7 +53,14 @@ public class FeatureTestActivity extends AppCompatActivity {
 //                range(from(2019, Calendar.FEBRUARY, 11), from(2019, Calendar.FEBRUARY, 18), ABSENT),
                 range(from(2019, Calendar.FEBRUARY, 19), from(2019, Calendar.FEBRUARY, 28), ABSENT)
         );
-
+        List<CalendarDay> days = new ArrayList<>();
+        days.add(CalendarDay.from(2019, Calendar.FEBRUARY, 2));
+        days.add(CalendarDay.from(2019, Calendar.FEBRUARY, 3));
+        days.add(CalendarDay.from(2019, Calendar.FEBRUARY, 4));
+        days.add(CalendarDay.from(2019, Calendar.FEBRUARY, 5));
+        days.add(CalendarDay.from(2019, Calendar.FEBRUARY, 6));
+        days.add(CalendarDay.from(2019, Calendar.FEBRUARY, 7));
+        calendarView.addDecorator(new CustomMultipleDayViewDecorator(ABSENT, WHITE, days));
         calendarView.select(ranges);
     }
 
