@@ -47,11 +47,17 @@ public class FeatureTestActivity extends AppCompatActivity {
 
     private void selectRange() {
         List<Range> ranges = asList(
-                range(from(2019, Calendar.FEBRUARY, 2), from(2019, Calendar.FEBRUARY, 4), PRESENT),
-                range(from(2019, Calendar.FEBRUARY, 5), from(2019, Calendar.FEBRUARY, 18), HOLIDAYS),
-//                range(from(2019, Calendar.FEBRUARY, 10), from(2019, Calendar.FEBRUARY, 14), HOLIDAYS),
-//                range(from(2019, Calendar.FEBRUARY, 11), from(2019, Calendar.FEBRUARY, 18), ABSENT),
-                range(from(2019, Calendar.FEBRUARY, 19), from(2019, Calendar.FEBRUARY, 28), ABSENT)
+                range(from(2019, Calendar.FEBRUARY, 3), from(2019, Calendar.FEBRUARY, 4), PRESENT),
+                range(from(2019, Calendar.FEBRUARY, 5), from(2019, Calendar.FEBRUARY, 8), HOLIDAYS),
+                range(from(2019, Calendar.FEBRUARY, 9), from(2019, Calendar.FEBRUARY, 15), ABSENT),
+                range(from(2019, Calendar.FEBRUARY, 16), from(2019, Calendar.FEBRUARY, 16), PRESENT),
+                range(from(2019, Calendar.FEBRUARY, 1), from(2019, Calendar.FEBRUARY, 2), HOLIDAYS),
+                range(from(2019, Calendar.FEBRUARY, 17), from(2019, Calendar.FEBRUARY, 18), ABSENT),
+                range(from(2019, Calendar.FEBRUARY, 19), from(2019, Calendar.FEBRUARY, 22), PRESENT),
+                range(from(2019, Calendar.FEBRUARY, 23), from(2019, Calendar.FEBRUARY, 23), PRESENT),
+                range(from(2019, Calendar.FEBRUARY, 24), from(2019, Calendar.FEBRUARY, 24), PRESENT),
+                range(from(2019, Calendar.FEBRUARY, 25), from(2019, Calendar.FEBRUARY, 25), PRESENT),
+                range(from(2019, Calendar.FEBRUARY, 26), from(2019, Calendar.FEBRUARY, 26), PRESENT)
         );
         List<CalendarDay> days = new ArrayList<>();
         days.add(CalendarDay.from(2019, Calendar.FEBRUARY, 2));

@@ -60,13 +60,11 @@ public class CustomSpan implements LineBackgroundSpan {
         if (color_left != 0) {
             paint.setColor(color_left);
         }
-        canvas.drawCircle(center_x - shift_x*2, center_y, radius, paint);
         canvas.drawCircle(center_x - shift_x, center_y, radius, paint);
 
         if (color_right != 0) {
             paint.setColor(color_right);
         }
-        canvas.drawCircle(center_x + shift_x*2, center_y, radius, paint);
         canvas.drawCircle(center_x + shift_x, center_y, radius, paint);
 
         paint.setColor(oldColor);

@@ -43,18 +43,18 @@ public class RangeDaySelectionCalculator {
         boolean continueThis = isContinue(day);
         int result;
         if (isFirstDay(day)) {
-            if (isLastDayInRow(day)) {
-                result = DayView.SELECTION_RANGE_LEFT;
+            if (isLastDayInRow(day) || !isSingle(day)) {
+                if (isLastDay(day))
+                    result = DayView.SELECTION_NORMAL;
+                else
+                    result = DayView.SELECTION_RANGE_LEFT;
             } else {
-                result = DayView.SELECTION_FIRST;
+                result = DayView.SELECTION_NORMAL;
             }
-            if(continueThis)
-                result = DayView.SELECTION_RANGE;
-        }
-        else if (isMiddleDay(day)) {
+        } else if (isMiddleDay(day)) {
             result = DayView.SELECTION_RANGE;
         } else { // last day
-            if (isLastDayInRow(day)) {
+            if (isLastDayInRow(day) && !isLastDay(day)) {
                 result = DayView.SELECTION_RANGE;
             } else {
                 result = DayView.SELECTION_LAST;
@@ -64,8 +64,12 @@ public class RangeDaySelectionCalculator {
         return new RangeDaySelectionResult(day, result);
     }
 
+    private boolean isSingle(CalendarDay day) {
+        return range.days().size() == 1;
+    }
+
     private boolean isContinue(CalendarDay day) {
-        return range.days().indexOf(day) > 0 && range.days().indexOf(day) < range.days().size();
+        return range.days().indexOf(day) >= 0 && range.days().indexOf(day) < range.days().size();
     }
 
     private boolean isFirstDayInRow(CalendarDay day) {

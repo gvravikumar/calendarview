@@ -1863,7 +1863,7 @@ public class CalendarView2 extends ViewGroup {
          * @param tileHeight view height in number of tiles
          */
         public LayoutParams(int tileHeight) {
-            super(MATCH_PARENT, tileHeight);
+            super(WRAP_CONTENT, tileHeight);
         }
 
     }
