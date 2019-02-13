@@ -43,11 +43,11 @@ public class FeatureTestActivity extends AppCompatActivity {
 
     private void selectRange() {
         List<Range> ranges = asList(
-                range(from(2019, Calendar.JANUARY, 3), from(2019, Calendar.JANUARY, 4), PRESENT),
-                range(from(2019, Calendar.JANUARY, 5), from(2019, Calendar.JANUARY, 7), HOLIDAYS),
-                range(from(2019, Calendar.JANUARY, 10), from(2019, Calendar.JANUARY, 14), HOLIDAYS),
-                range(from(2019, Calendar.JANUARY, 17), from(2019, Calendar.JANUARY, 18), ABSENT),
-                range(from(2019, Calendar.JANUARY, 19), from(2019, Calendar.JANUARY, 21), PRESENT)
+                range(from(2019, Calendar.FEBRUARY, 2), from(2019, Calendar.FEBRUARY, 4), PRESENT),
+                range(from(2019, Calendar.FEBRUARY, 5), from(2019, Calendar.FEBRUARY, 18), HOLIDAYS),
+//                range(from(2019, Calendar.FEBRUARY, 10), from(2019, Calendar.FEBRUARY, 14), HOLIDAYS),
+//                range(from(2019, Calendar.FEBRUARY, 11), from(2019, Calendar.FEBRUARY, 18), ABSENT),
+                range(from(2019, Calendar.FEBRUARY, 19), from(2019, Calendar.FEBRUARY, 28), ABSENT)
         );
 
         calendarView.select(ranges);

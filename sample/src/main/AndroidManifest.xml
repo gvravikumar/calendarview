@@ -11,11 +11,11 @@
         <activity
             android:name="com.ptrstovka.calendarview2.sample.MainActivity"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name="com.ptrstovka.calendarview2.sample.OldCalendarViewActivity"
@@ -198,10 +198,16 @@
                 />
 
             <intent-filter>
-                <action android:name="android.intent.action.RUN"/>
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="com.prolificinteractive.materialcalendarview.sample.SAMPLE"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.RUN"/>-->
+
+                <!--<category android:name="com.prolificinteractive.materialcalendarview.sample.SAMPLE"/>-->
+            <!--</intent-filter>-->
 
         </activity>
     </application>
