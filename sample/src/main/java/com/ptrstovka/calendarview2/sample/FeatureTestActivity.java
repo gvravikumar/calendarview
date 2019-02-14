@@ -2,6 +2,7 @@ package com.ptrstovka.calendarview2.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 
 import com.ptrstovka.calendarview2.CalendarDay;
 import com.ptrstovka.calendarview2.CalendarView2;

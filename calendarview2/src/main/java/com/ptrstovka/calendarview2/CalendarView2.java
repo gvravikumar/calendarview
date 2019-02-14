@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ptrstovka.calendarview2.format.ArrayWeekDayFormatter;
@@ -42,6 +42,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import static android.widget.RelativeLayout.CENTER_VERTICAL;
+import static android.widget.RelativeLayout.TRUE;
 
 /**
  * <p>
@@ -178,7 +181,8 @@ public class CalendarView2 extends ViewGroup {
     private final CalendarPager pager;
     private CalendarPagerAdapter<?> adapter;
     private CalendarDay currentMonth;
-    private LinearLayout topbar;
+    private RelativeLayout topbar;
+    //    private LinearLayout topbar;
     private CalendarMode calendarMode;
     /**
      * Used for the dynamic calendar height.
@@ -408,27 +412,46 @@ public class CalendarView2 extends ViewGroup {
         }
     }
 
+    private void addCustomTitleBar(View view) {
+        addView(view);
+    }
+
+    @SuppressLint("ResourceType")
     private void setupChildren() {
-        topbar = new LinearLayout(getContext());
-        topbar.setOrientation(LinearLayout.HORIZONTAL);
-        topbar.setClipChildren(false);
-        topbar.setClipToPadding(false);
-        addView(topbar, new LayoutParams(1));
 
-        buttonPast.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        topbar.addView(buttonPast, new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1));
+        topbar = new RelativeLayout(getContext());
+        topbar.setClipChildren(true);
+        topbar.setClipToPadding(true);
 
+        title.setId(1111);
         title.setGravity(Gravity.CENTER);
-        topbar.addView(title, new LinearLayout.LayoutParams(
-                0, LayoutParams.MATCH_PARENT, DEFAULT_DAYS_IN_WEEK - 2
-        ));
+        title.setPadding(13,20,13,24);
+        RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        rl.addRule(RelativeLayout.CENTER_IN_PARENT, TRUE);
+        topbar.addView(title, rl);
 
+        RelativeLayout.LayoutParams firstImageParams = new RelativeLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        firstImageParams.addRule(RelativeLayout.LEFT_OF, title.getId());
+        firstImageParams.addRule(CENTER_VERTICAL, TRUE);
+        buttonPast.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        topbar.addView(buttonPast, firstImageParams);
+
+        RelativeLayout.LayoutParams secImageParams = new RelativeLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        secImageParams.addRule(RelativeLayout.RIGHT_OF, title.getId());
+        secImageParams.addRule(CENTER_VERTICAL, TRUE);
         buttonFuture.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        topbar.addView(buttonFuture, new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1));
+        topbar.addView(buttonFuture, secImageParams);
+
+        addView(topbar);
 
         pager.setId(R.id.mcv_pager);
         pager.setOffscreenPageLimit(1);
         addView(pager, new LayoutParams(calendarMode.visibleWeeksCount + DAY_NAMES_ROW));
+
+
     }
 
     private void updateUi() {

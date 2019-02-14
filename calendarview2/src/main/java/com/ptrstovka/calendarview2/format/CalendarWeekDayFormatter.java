@@ -41,6 +41,6 @@ public class CalendarWeekDayFormatter implements WeekDayFormatter {
     @Override
     public CharSequence format(int dayOfWeek) {
         calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
-        return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault());
+        return (calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
     }
 }

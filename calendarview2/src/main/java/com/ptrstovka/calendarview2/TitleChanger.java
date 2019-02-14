@@ -72,9 +72,9 @@ class TitleChanger {
         lastAnimTime = now;
 
         final CharSequence newTitle = titleFormatter.format(currentMonth);
-
+        final CharSequence trim = newTitle.subSequence(0,3) + " " + newTitle.toString().split(" ")[1];
         if (!animate) {
-            title.setText(newTitle);
+            title.setText(trim);
         } else {
             final int translation = translate * (previousMonth.isBefore(currentMonth) ? 1 : -1);
             final ViewPropertyAnimator viewPropertyAnimator = title.animate();
@@ -99,7 +99,7 @@ class TitleChanger {
 
                         @Override
                         public void onAnimationEnd(Animator animator) {
-                            title.setText(newTitle);
+                            title.setText(trim);
                             doTranslation(title, translation);
 
                             final ViewPropertyAnimator viewPropertyAnimator = title.animate();
