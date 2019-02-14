@@ -8,15 +8,14 @@
     tools:context="com.ptrstovka.calendarview2.sample.FeatureTestActivity">
 
     <com.ptrstovka.calendarview2.CalendarView2
-        android:id="@+id/calendar_view"
-        android:layout_width="wrap_content"
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mcv_weekDayTextAppearance="@style/CustomWeekTextAppearance"
-        app:mcv_selectionColor="@color/sample_primary"
+        app:mcv_arrowColor="#05AEEF"
         app:mcv_circlePadding="5dp"
-        app:mcv_showOtherDates="none"
-        />
-
+        app:mcv_leftArrowMask="@drawable/ic_attendance_left_arrow"
+        app:mcv_rightArrowMask="@drawable/ic_attendance_right_arrow"
+        app:mcv_showOtherDates="none" />
     <Button
         android:id="@+id/calendar_action_button"
         android:layout_width="wrap_content"

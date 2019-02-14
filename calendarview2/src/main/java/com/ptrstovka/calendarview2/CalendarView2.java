@@ -425,7 +425,7 @@ public class CalendarView2 extends ViewGroup {
 
         title.setId(1111);
         title.setGravity(Gravity.CENTER);
-        title.setPadding(13,20,13,24);
+        title.setPadding(13,0,13,0);
         RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(
                 android.view.ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         rl.addRule(RelativeLayout.CENTER_IN_PARENT, TRUE);
