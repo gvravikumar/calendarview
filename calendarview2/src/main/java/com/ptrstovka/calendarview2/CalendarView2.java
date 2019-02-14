@@ -241,6 +241,8 @@ public class CalendarView2 extends ViewGroup {
     private int firstDayOfWeek;
 
     private int dayCirclePadding = 0;
+    Context context;
+    AttributeSet attrs;
 
     private State state;
 
@@ -250,7 +252,8 @@ public class CalendarView2 extends ViewGroup {
 
     public CalendarView2(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        this.context = context;
+        this.attrs = attrs;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //If we're on good Android versions, turn off clipping for cool effects
             setClipToPadding(false);
@@ -418,14 +421,19 @@ public class CalendarView2 extends ViewGroup {
 
     @SuppressLint("ResourceType")
     private void setupChildren() {
-
+        TypedArray a = context.getTheme()
+                .obtainStyledAttributes(attrs, R.styleable.CalendarView2, 0, 0);
         topbar = new RelativeLayout(getContext());
         topbar.setClipChildren(true);
         topbar.setClipToPadding(true);
 
         title.setId(1111);
         title.setGravity(Gravity.CENTER);
-        title.setPadding(13,0,13,0);
+        title.setPadding(
+                a.getDimensionPixelOffset(R.styleable.CalendarView2_mcv_leftArrowMaskPadding, 13)
+                , 0,
+                a.getDimensionPixelOffset(R.styleable.CalendarView2_mcv_rightArrowMaskPadding, 13)
+                , 0);
         RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(
                 android.view.ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         rl.addRule(RelativeLayout.CENTER_IN_PARENT, TRUE);
