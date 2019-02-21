@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,16 +14,18 @@
         app:mcv_circlePadding="5dp"
         app:mcv_leftArrowMask="@drawable/ic_attendance_left_arrow"
         app:mcv_leftArrowMaskPadding="33dp"
+        app:mcv_left_enable="false"
         app:mcv_rightArrowMask="@drawable/ic_attendance_right_arrow"
-        app:mcv_rightArrowMaskPadding="3dp"
+        app:mcv_rightArrowMaskPadding="33dp"
+        app:mcv_right_enable="false"
         app:mcv_showOtherDates="none" />
+
     <Button
         android:id="@+id/calendar_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:visibility="gone"
         android:text="@string/text_action"
-        />
+        android:visibility="gone" />
 
 </FrameLayout>

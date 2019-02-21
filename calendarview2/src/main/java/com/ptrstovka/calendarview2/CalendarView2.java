@@ -184,6 +184,8 @@ public class CalendarView2 extends ViewGroup {
     private RelativeLayout topbar;
     //    private LinearLayout topbar;
     private CalendarMode calendarMode;
+    private boolean futureDisable;
+    private boolean pastDisable;
     /**
      * Used for the dynamic calendar height.
      */
@@ -194,9 +196,9 @@ public class CalendarView2 extends ViewGroup {
     private final OnClickListener onClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (v == buttonFuture) {
+            if (v == buttonFuture && futureDisable) {
                 pager.setCurrentItem(pager.getCurrentItem() + 1, true);
-            } else if (v == buttonPast) {
+            } else if (v == buttonPast && pastDisable) {
                 pager.setCurrentItem(pager.getCurrentItem() - 1, true);
             }
         }
@@ -264,6 +266,9 @@ public class CalendarView2 extends ViewGroup {
             setClipToPadding(true);
         }
 
+        TypedArray a = context.getTheme()
+                .obtainStyledAttributes(attrs, R.styleable.CalendarView2, 0, 0);
+
         buttonPast = new DirectionButton(getContext());
         buttonPast.setContentDescription(getContext().getString(R.string.previous));
         title = new TextView(getContext());
@@ -286,8 +291,8 @@ public class CalendarView2 extends ViewGroup {
             }
         });
 
-        TypedArray a = context.getTheme()
-                .obtainStyledAttributes(attrs, R.styleable.CalendarView2, 0, 0);
+        pastDisable = a.getBoolean(R.styleable.CalendarView2_mcv_left_enable, true);
+        futureDisable = a.getBoolean(R.styleable.CalendarView2_mcv_right_enable, true);
         try {
             int calendarModeIndex = a.getInteger(
                     R.styleable.CalendarView2_mcv_calendarMode,
