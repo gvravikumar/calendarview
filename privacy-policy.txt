@@ -1,0 +1,17 @@
+Privacy Policy for [Your App Name]
+
+Effective Date: [Date]
+
+This Privacy Policy describes how [Your Company/Developer Name] ("we," "us," or "our") collects, uses, and shares information when you use our mobile application, [Your App Name] (the "App").
+
+Information We Collect:
+
+* your emailId to create a unique google sheet to save your records
+
+How We Use Your Information:
+
+* We use your email Id to check if you have any existing records saved alredy.
+
+Contact Us:
+
+* If you have any questions about this Privacy Policy, please contact us at: [gvpraveen.ravi@gmail.com]
